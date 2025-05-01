@@ -14,38 +14,6 @@ namespace SpriteKind {
     export const NPC10 = SpriteKind.create()
     export const NPC11 = SpriteKind.create()
 }
-let mysprite21: Sprite = null
-let level = 0
-let maps: tiles.TileMapData[] = []
-let mySprite: Sprite = null
-let Faceingleft = false
-let Faceingright = false
-let Faceingup = false
-let Faceingdown = false
-let mySprite2: Sprite = null
-let mySprite3: Sprite = null
-let mySprite4: Sprite = null
-let mySprite5: Sprite = null
-let mySprite6: Sprite = null
-let mySprite7: Sprite = null
-let statusbar: StatusBarSprite = null
-let mysprite19: Sprite = null
-let mySprite12: Sprite = null
-let Bullet: Sprite = null
-let BombCode1 = 0
-let Bombpoints = 0
-let mySprite9: Sprite = null
-let mySprite13: Sprite = null
-let mySprite10: Sprite = null
-let Mysprite17: Sprite = null
-let mySprite11: Sprite = null
-let mysprite22: Sprite = null
-let mySprite8: Sprite = null
-let code = 0
-let mysprite18: Sprite = null
-let mySprite16: Sprite = null
-let mySprite14: Sprite = null
-let Mysprite20: Sprite = null
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC10, function (sprite, otherSprite) {
     if (otherSprite == mysprite21) {
         timer.throttle("action", 6000, function () {
@@ -1488,6 +1456,94 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`Armory inside door 1`, functi
         Enemy_NPC()
     }
 })
+let Mysprite20: Sprite = null
+let mySprite14: Sprite = null
+let mySprite16: Sprite = null
+let mysprite18: Sprite = null
+let code = 0
+let mySprite8: Sprite = null
+let mysprite22: Sprite = null
+let mySprite11: Sprite = null
+let Mysprite17: Sprite = null
+let mySprite10: Sprite = null
+let mySprite13: Sprite = null
+let mySprite9: Sprite = null
+let BombCode1 = 0
+let Bullet: Sprite = null
+let mySprite12: Sprite = null
+let mysprite19: Sprite = null
+let mySprite7: Sprite = null
+let mySprite6: Sprite = null
+let mySprite5: Sprite = null
+let mySprite4: Sprite = null
+let mySprite3: Sprite = null
+let mySprite2: Sprite = null
+let Faceingdown = false
+let Faceingup = false
+let Faceingright = false
+let Faceingleft = false
+let level = 0
+let mysprite21: Sprite = null
+let statusbar: StatusBarSprite = null
+let mySprite: Sprite = null
+let maps: tiles.TileMapData[] = []
+// Arrays start at 0, not 1.
+maps = [
+tilemap`Main level 0`,
+tilemap`shop 1`,
+tilemap`House 0`,
+tilemap`House 3`,
+tilemap`House 6`,
+tilemap`House 3`,
+tilemap`House 5`,
+tilemap`Armory`,
+tilemap`Bunker1`,
+tilemap`Bunker level 2`,
+tilemap`Bunker level 3`,
+tilemap`Farm Shop`,
+tilemap`House 4`,
+tilemap`Bunker1-2`,
+tilemap`Bunker level 3 part 2`,
+tilemap`shop 1 part 2`,
+tilemap`Armory0`
+]
+mySprite = sprites.create(img`
+    . . . . f f f f . . . . . 
+    . . f f f f f f f f . . . 
+    . f f f f f f c f f f . . 
+    f f f f f f c c f f f c . 
+    f f f c f f f f f f f c . 
+    c c c f f f e e f f c c . 
+    f f f f f e e f f c c f . 
+    f f f b f e e f b f f f . 
+    . f 4 1 f 4 4 f 1 4 f . . 
+    . f e 4 4 4 4 4 4 e f . . 
+    . f f f e e e e f f f . . 
+    f e f b 7 7 7 7 b f e f . 
+    e 4 f 7 7 7 7 7 7 f 4 e . 
+    e e f 6 6 6 6 6 6 f e e . 
+    . . . f f f f f f . . . . 
+    . . . f f . . f f . . . . 
+    `, SpriteKind.Player)
+mySprite.setPosition(225, 40)
+controller.moveSprite(mySprite, 100, 100)
+mySprite.z = 1
+scene.cameraFollowSprite(mySprite)
+tiles.setCurrentTilemap(tilemap`Main level 0`)
+game.showLongText("Defuse all of the bombs before the time runs out!!!", DialogLayout.Bottom)
+game.showLongText("The codes are hidden throughout the world. Good luck!", DialogLayout.Bottom)
+NPC_Spawn()
+Enemy_NPC()
+statusbar = statusbars.create(20, 4, StatusBarKind.Health)
+info.setLife(3)
+statusbar.value = 700
+statusbar.setLabel("HP")
+statusbar.setBarBorder(1, 15)
+statusbar.attachToSprite(mySprite)
+statusbar.setOffsetPadding(0, 3)
+info.startCountdown(240)
+let Bombpoints = 0
+Intro()
 forever(function () {
     if (level != 0) {
         sprites.destroyAllSpritesOfKind(SpriteKind.NPC)
